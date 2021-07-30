@@ -63,7 +63,7 @@ Using the above command to get 30 lines below the occurrance. It looked someting
 
 I then used cyberchef to decode the flag.
 
-![](images.Lab4.3.png)
+![](images/Lab4.3.png)
 
 **inctf{1_is_n0t_EQu4l_7o_2_bUt_th1s_d0s3nt_m4ke_s3ns3}**
 
