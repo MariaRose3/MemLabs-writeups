@@ -6,9 +6,9 @@ Challenge: [MemLabs6](https://mega.nz/file/C0pjUKxI#LnedePAfsJvFgD-Uaa4-f1Tu0kl5
 Note: This challenge is composed of 1 flag split into 2 parts.
 The flag format for this lab is: inctf{s0me_l33t_Str1ng}
 
-Again extracted the memory dump and found the profile. It is Win7SP1x64. Funny, an underworld gangster users Win7SP1x64. LOL
+Again extracted the memory dump and found the profile. It is Win7SP1x64. Funny, an underworld gangster users Win7SP1x64. LOL!
 
-As usual listed all the running processes when the dump was collected.
+As usual listed all the running processes when the memory dump was collected.
 ```
 python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab6.raw pslist
 ```
@@ -44,9 +44,9 @@ and other stuff involving chrome and firefox. Maybe, we need to get the browser 
 ```
 python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab6.raw chromehistory
 ```
-Here in the middle of some random searches and other socila media links, I found a pastbin link.
+Here in the middle of some random searches and other social media links, I found a pastbin link.
 
-![](images.Lab5.1.png)
+![](images/Lab6.1.png)
 
 https://pastebin.com/RSGSi1hk
 
@@ -63,7 +63,7 @@ The key is... :(
 
 I opened the above document and found a MEGA link in the middle of nowhere.
 
-![](images/Lab5.2.png)
+![](images/Lab6.2.png)
 
 https://mega.nz/#!SrxQxYTQ
 
@@ -73,41 +73,47 @@ Meanwhile, I did a file scan and found this.
 ```
 0x000000005fcfc4b0     16      0 R--rwd \Device\HarddiskVolume2\Users\Jaffa\Desktop\pr0t3ct3d\flag.rar
 ```
-I need the passwprd for flag2.png.
+I need the password for flag2.png.
 
 Clearly, I'm missing something. I forgot to look at the firefox history.
 ```
 python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab6.raw firefoxhistory
 ```
-But I found nothing. I read the note in pastbin again. I says, David sent the key in mail. So I guess I must go back to the chromehistory and look again.
-I did, but without much luck. I stayed stuck for quite some time. I then thought of using strings on the memory dump. I first did grep to search for key, then drive, then Mega. I found interesting results in Mega. So I comblied the three and tried 'Mega Drive Key'. It seemed very obsfucated, but looking a little closer I gound this.
+But I found nothing. I read the note in pastbin again. I says, David sent the key in mail. So I guess I must go back to the chromehistory and check again.
+I did, but without much luck. I stayed stuck for quite some time. I then thought of using strings on the memory dump. I first did grep to search for key, then drive, then Mega. I found interesting results in Mega. So I combined the three and tried 'Mega Drive Key'. It seemed very obsfucated, but looking a little closer I gound this.
 
-![](images/Lab5.3.png)
+![](images/Lab6.3.png)
+
 ```
 THE KEY IS zyWxCjCYYSEMA-hZe552qWVXiPwa5TecODbjnsscMIU
 ```
-Finally unlocked the mega filder and downloded flag_.png. I tried to open the image, but damn! The file is corrupted.
+Finally unlocked the mega folder and downloded flag_.png. I tried to open the image, but damn! The file is corrupt.
 But we have a hint. When I tried to open the file there was an error. "Fatal error reading PNG image file: zTXt: missing IHDR"
 
-![](images/Lab5.4.png)
-Maybe we can rectify the corrupted image. IHDR is missing. So we need to add this in the right place.
+![](images/Lab6.4.png)
+
+Maybe we can rectify the corrupt image. IHDR is missing. So we need to add this in the right place.
 I opened the file using ghex and found this interesting error.
 
 ![](images/Lab6.5.png)
 
-Thus, we need to replace 'i' with a 'I'. So I changed the respepctive ASCII values from 69 to 49. And got the fianl image. So we have the first half.
+Thus, we need to replace 'i' with a 'I'. So I changed the respepctive ASCII values from 69 to 49. And got the final image. So we have the first half.
+
 ![](images/flag_.png)
 
 **inctf{thi5_cH4LL3Ng3_!s_g0nn4_b3_?_**
 
 I thought the first half would unlock the second half, but I'm mistaken :/
-Which means we left out something. Looking into the plugins again, I realised I missed out envars.
+Which means we left out something. Looking into the plugins again, I realised I missed out envars. I used grep to sort out the mess.
 ```
 python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab6.raw envars | grep RAR
 ```
+![](images/Lab6.6.png)
+
 Thus we found the password 'easypeasyvirus'
 
-We extracted this image.
+Finally, extracted this image.
+
 ![](images/flag2.png)
 
 The second half is **aN_Am4zINg_!\_i_gU3Ss???\_}**
