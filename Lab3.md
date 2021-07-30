@@ -30,10 +30,12 @@ Command line : "C:\Windows\system32\NOTEPAD.EXE" C:\Users\hello\Desktop\vip.txt
 ```
 Now I need to get evilscript.py and vip.txt to my local machine. So I did a filescan and then used grep to get the file offset.
 
-```0x000000003de1b5f0      8      0 R--rw- \Device\HarddiskVolume2\Users\hello\Desktop\evilscript.py.py```
-```0x000000003e727e50      8      0 -W-rw- \Device\HarddiskVolume2\Users\hello\Desktop\vip.txt```
+```
+0x000000003de1b5f0      8      0 R--rw- \Device\HarddiskVolume2\Users\hello\Desktop\evilscript.py.py
+0x000000003e727e50      8      0 -W-rw- \Device\HarddiskVolume2\Users\hello\Desktop\vip.txt
+```
 
-Used the commands to get the files.
+Used the following commands to get the files to my machine.
 ```
 python2 vol.py --profile=Win7SP1x86_23418 -f MemoryDump_Lab3.raw dumpfiles -Q 0x000000003de1b5f0 -D ./Lab3
 python2 vol.py --profile=Win7SP1x86_23418 -f MemoryDump_Lab3.raw dumpfiles -Q 0x000000003e727e50 -D ./Lab3
