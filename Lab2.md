@@ -31,7 +31,7 @@ According to the discription, the person is an 'environmental' activist. This se
 ```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab2.raw envars```
 Something interesting here. Why would anyone name a file or folder as something unreadable?!
 ![](images/Lab2.2.png)
-On decoding the base64 string, we get the first lab.
+On decoding the base64 string, we get the first flag.
 **flag{w3lc0m3_T0_$T4g3_!\_Of_L4B_2}**
 
 Also, one the person's go-to applications was his browser. Thus we need to go through this browser history.
@@ -40,7 +40,9 @@ Also, one the person's go-to applications was his browser. Thus we need to go th
 
 We found the link to [this](https://mega.nz/#F!TrgSQQTS!H0ZrUzF0B-ZKNM3y9E76lg) MEGA folder. Interesting!!!
 It had a zip file, which I downloaded to my system. Trying to unzip the file, it said that the password is SHA1(stage3 flag of lab1). The required flag is flag{w3ll_3rd_stage_was_easy}. I used an [online tool](https://passwordsgenerator.net/sha1-hash-generator/) to generate the hash. '6045dd90029719a039fd2d2ebcca718439dd100a'
+
 ![](images/Important.png)
+
 We found the third flag first this time also ;)
 **flag{oK_So_Now_St4g3_3_is_DoNE!!}**
 
@@ -56,6 +58,7 @@ Though it took a moment, I got an accurate result.
 I then got the corresponding memory dump to my local machine.
 ```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab2.raw dumpfiles -Q 0x000000003fb112a0 -D ./Lab2```
 I renamed it as hidden.kdbx and then tried to open it. I installed KeePassX in the process. But the file was password protedted. So I did another file scan this time filtering using ```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab2.raw filescan | grep Password ```
+
 ![](images/Lab2.4.png)
 
 So I brought Password.png to my machine.
@@ -63,7 +66,9 @@ So I brought Password.png to my machine.
 ![](images/Password.png)
 In one corner I found the password 'P4SSw0rd_123'. I opend hidden.kdbx, eager to see the flag. Damn!!! Got rick-rolled :/
 Finally in the recycle bin, I found the damn flag.
+
 ![](images/Lab2.5.png)
+
 **flag{w0w_th1s_1s_Th3_SeC0nD_ST4g3_!!}**
 
 
