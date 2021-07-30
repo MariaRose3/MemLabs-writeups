@@ -42,7 +42,7 @@ Then using grep I found
 I then brought the StikyNot to my machine using
 ```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw dumpfiles -Q 0x000000003fd095b0 -D ./Lab4```
 That was some executable file. But it seemed like a dead end.
-So I went back to filescan.txt to look for something interestinf. After scrolling for quite sometime, I stumbled upon
+So I went back to filescan.txt to look for something interesting. After scrolling for quite sometime, I stumbled upon
 ```0x000000003fc398d0     16      0 R--rw- \Device\HarddiskVolume2\Users\SlimShady\Desktop\Important.txt```
 
 It then struck me, I should have done grep on the user name, because a typical user would save a file in his home folder.
@@ -61,7 +61,7 @@ Using the above command to get 30 lines below the occurrance. It looked someting
 
 ![](images/Lab4.2.png)
 
-I then used cuberchef to decode the flag.
+I then used cyberchef to decode the flag.
 
 ![](images.Lab4.3.png)
 
