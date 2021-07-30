@@ -63,7 +63,7 @@ So I tried to get it's memory dump.
 ```
 python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab5.raw memdump -p 2724 -D ./Lab5
 ```
-But the whole thing was very clumsy and I couldn't make any sense of it. Ao I searched for anothe plugin and found procdump. It dumps a process to an executable file sample (according to the offical docs).
+But the whole thing was very clumsy and I couldn't make any sense of it. So I searched for another plugin and found procdump. It dumps a process to an executable file sample (according to the offical docs).
 
 ```
 python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab5.raw procdump -p 2724 -D ./Lab5
