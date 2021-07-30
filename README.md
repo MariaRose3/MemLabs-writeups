@@ -1,3 +1,3 @@
 # MemLabs-writeups
 
-I wirte how I approached each of the five labs in brief.
+I document my tought process wihile solving the memory forensics challenges of MemLabs CTF.
