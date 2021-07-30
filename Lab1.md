@@ -72,6 +72,8 @@ The third flag was in the image I got after extracting.
 
 ![](images/flag3.png)
 
+Third flag is **flag{w3ll_3rd_stage_was_easy}**
+
 Now for the second flag, I need to know what that person was drawing. So I brought just the memory dump of that process to my local machine.
 ```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab1.raw memdump -p 2424 -D ./Lab1```
 
@@ -81,10 +83,4 @@ It finally made some sense when the image type was RGB alpha and the offset:5247
 ![](images/Lab1.4.png)
 
 Thus the second flag is **flag{G00d_BOY_good_GirL_}**
-
-
-
-
-
-
 
