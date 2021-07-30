@@ -14,8 +14,8 @@ So the profile is Win7SP1x64.
 
 Found the process that were running when the dump was taken using pslist.
 
-```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw pslist
-```
+```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw pslist```
+
 The following were interesting.
 ```
 0xfffffa80022f0610 GoogleCrashHan         2272   2008      7       99      0      1 2019-06-29 07:29:08 UTC+0000                                 
@@ -34,8 +34,8 @@ StikyNot.exe pid:   2432
 Command line : "C:\Windows\System32\StikyNot.exe" 
 ```
 Then I did a file scan.
-```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw filescan > ./Lab4/filescan.txt
-```
+```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw filescan > ./Lab4/filescan.txt```
+
 Then using grep I found 
 ```0x000000003fd095b0     10      0 R--r-d \Device\HarddiskVolume2\Windows\System32\StikyNot.exe```
 
@@ -43,20 +43,20 @@ I then brought the StikyNot to my machine using
 ```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw dumpfiles -Q 0x000000003fd095b0 -D ./Lab4```
 That was some executable file. But it seemed like a dead end.
 So I went back to filescan.txt to look for something interestinf. After scrolling for quite sometime, I stumbled upon
-```0x000000003fc398d0     16      0 R--rw- \Device\HarddiskVolume2\Users\SlimShady\Desktop\Important.txt
-```
+```0x000000003fc398d0     16      0 R--rw- \Device\HarddiskVolume2\Users\SlimShady\Desktop\Important.txt```
+
 It then struck me, I should have done grep on the user name, because a typical user would save a file in his home folder.
 So I then tried to bring Important.txt to my machine.
-```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw dumpfiles -Q 0x000000003fc398d0 -D ./Lab4
-```
+```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw dumpfiles -Q 0x000000003fc398d0 -D ./Lab4```
+
 Everything seemed normal, but no file was found. It was totally unexpected. I felt I was missing something. Maybe, this file was stored somewhere else. 
 So the other alternative might be the NTFS file partition. Here only small files can be stored in the Master File Table (MFT). It is used to manage files on the hard disk more efficiently.
 Used the following command to search for the suitable plugin.
-```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw --help |grep mft
-```
+```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw --help |grep mft```
+
 Found the plugin called mftparser.
-```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw mftparser | grep -C 30 Important
-```
+```python2 vol.py --profile=Win7SP1x64 -f MemoryDump_Lab4.raw mftparser | grep -C 30 Important```
+
 Using the above command to get 30 lines below the occurrance. It looked someting like the flag.
 
 ![](images/Lab4.2.png)
